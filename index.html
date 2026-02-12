@@ -1,1 +1,1456 @@
-HOLA MUNDO
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GL Construction Builders - Solid Work. Real Results.</title>
+    <link rel="icon" href="./img/logo.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Raleway:wght@700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --blue: #1a6eb5;
+            --blue-dark: #0d4f8a;
+            --blue-light: #2b8fdc;
+            --gold: #c9a84c;
+            --gold-light: #e8c97a;
+            --dark: #111827;
+            --mid: #1f2d3d;
+            --light: #f0f4f8;
+            --white: #ffffff;
+            --gray: #64748b;
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            overflow-x: hidden
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(17, 24, 39, 0.97);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: .9rem 2rem;
+        }
+
+        .logo-wrap {
+            display: flex;
+            align-items: center;
+            gap: .9rem
+        }
+
+        .logo-wrap img {
+            height: 55px;
+            width: auto
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1
+        }
+
+        .logo-text .top {
+            font-family: 'Raleway', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--white);
+            letter-spacing: 2px;
+        }
+
+        .logo-text .top span {
+            color: var(--gold)
+        }
+
+        .logo-text .sub {
+            font-size: .7rem;
+            color: var(--gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, .8);
+            font-weight: 600;
+            font-size: .95rem;
+            letter-spacing: .5px;
+            transition: color .3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold)
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width .3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px
+        }
+
+        .menu-toggle span {
+            width: 26px;
+            height: 2px;
+            background: var(--gold);
+            transition: all .3s
+        }
+
+        /* ── HERO ── */
+        .hero {
+            margin-top: 78px;
+            min-height: 95vh;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--mid) 60%, #0d3a6b 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* blueprint grid overlay */
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(43, 143, 220, .07) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(43, 143, 220, .07) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        /* diagonal gold accent */
+        .hero::after {
+            content: '';
+            position: absolute;
+            right: -100px;
+            top: -100px;
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, var(--gold) 0%, transparent 60%);
+            opacity: .08;
+            border-radius: 50%;
+        }
+
+        .hero-inner {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-left {}
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: .6rem;
+            background: rgba(201, 168, 76, .15);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: .4rem 1rem;
+            border-radius: 50px;
+            font-size: .8rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-family: 'Raleway', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--white);
+            line-height: 1.1;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero h1 em {
+            color: var(--gold);
+            font-style: normal
+        }
+
+        .hero .tagline {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, .7);
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            letter-spacing: .5px;
+        }
+
+        .hero .desc {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, .55);
+            line-height: 1.9;
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: .6rem;
+            padding: .9rem 2rem;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: var(--dark);
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all .3s;
+            font-size: .95rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(201, 168, 76, .4)
+        }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: .6rem;
+            padding: .9rem 2rem;
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, .3);
+            color: var(--white);
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all .3s;
+            font-size: .95rem;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--gold);
+            color: var(--gold)
+        }
+
+        /* hero right — stat cards */
+        .hero-right {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-top: 3px solid var(--gold);
+            padding: 2rem 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: all .3s;
+        }
+
+        .stat-card:hover {
+            background: rgba(201, 168, 76, .08);
+            border-color: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        .stat-card .num {
+            font-family: 'Raleway', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--gold);
+            display: block;
+        }
+
+        .stat-card .lbl {
+            font-size: .85rem;
+            color: rgba(255, 255, 255, .65);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        /* ── SECTION BASE ── */
+        section {
+            padding: 6rem 2rem
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem
+        }
+
+        .section-tag {
+            display: inline-block;
+            background: rgba(26, 110, 181, .1);
+            color: var(--blue);
+            padding: .3rem 1rem;
+            border-radius: 50px;
+            font-size: .8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: .8rem;
+            border: 1px solid rgba(26, 110, 181, .2);
+        }
+
+        .section-title {
+            font-family: 'Raleway', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--dark);
+            margin-bottom: .8rem;
+        }
+
+        .title-line {
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--blue));
+            margin: .8rem auto 0;
+            border-radius: 2px;
+        }
+
+        .section-sub {
+            color: var(--gray);
+            font-size: 1.1rem;
+            margin-top: 1rem;
+        }
+
+        /* ── ABOUT ── */
+        .about {
+            background: var(--light)
+        }
+
+        .about-layout {
+            display: grid;
+            grid-template-columns: 5fr 4fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .about-left {}
+
+        .about-left p {
+            color: var(--gray);
+            line-height: 1.9;
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem
+        }
+
+        .mv-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 2rem
+        }
+
+        .mv-card {
+            background: var(--white);
+            padding: 1.8rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--blue);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, .06);
+        }
+
+        .mv-card.vision {
+            border-left-color: var(--gold)
+        }
+
+        .mv-card h4 {
+            font-family: 'Raleway', sans-serif;
+            font-size: 1.1rem;
+            color: var(--dark);
+            margin-bottom: .6rem;
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+        }
+
+        .mv-card h4 i {
+            color: var(--blue)
+        }
+
+        .mv-card.vision h4 i {
+            color: var(--gold)
+        }
+
+        .mv-card p {
+            color: var(--gray);
+            font-size: .95rem;
+            line-height: 1.7
+        }
+
+        /* why choose — right side */
+        .about-right h3 {
+            font-family: 'Raleway', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .reason-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem
+        }
+
+        .reason-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            background: var(--white);
+            padding: 1.2rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .05);
+            transition: all .3s;
+        }
+
+        .reason-item:hover {
+            transform: translateX(6px);
+            border-left: 3px solid var(--blue)
+        }
+
+        .reason-item .icon {
+            width: 38px;
+            height: 38px;
+            min-width: 38px;
+            background: linear-gradient(135deg, var(--blue), var(--blue-light));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: .9rem;
+        }
+
+        .reason-item p {
+            font-size: .95rem;
+            color: var(--dark);
+            font-weight: 500;
+            line-height: 1.4
+        }
+
+        /* ── SERVICES ── */
+        .services {
+            background: var(--white)
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .svc-card {
+            position: relative;
+            overflow: hidden;
+            background: var(--light);
+            padding: 2.5rem 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(26, 110, 181, .12);
+            transition: all .35s;
+        }
+
+        .svc-card:hover {
+            background: var(--white);
+            box-shadow: 0 20px 50px rgba(26, 110, 181, .15);
+            transform: translateY(-8px);
+            border-color: var(--blue);
+        }
+
+        .svc-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--blue), var(--gold));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .4s;
+        }
+
+        .svc-card:hover::before {
+            transform: scaleX(1)
+        }
+
+        .svc-num {
+            font-family: 'Raleway', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: rgba(26, 110, 181, .08);
+            position: absolute;
+            top: 1rem;
+            right: 1.2rem;
+            line-height: 1;
+        }
+
+        .svc-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.4rem;
+            margin-bottom: 1.3rem;
+            transition: all .3s;
+        }
+
+        .svc-card:hover .svc-icon {
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: var(--dark);
+        }
+
+        .svc-card h3 {
+            font-family: 'Raleway', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: .8rem;
+        }
+
+        .svc-card p {
+            color: var(--gray);
+            font-size: .9rem;
+            margin-bottom: 1rem;
+            line-height: 1.6
+        }
+
+        .svc-list {
+            list-style: none
+        }
+
+        .svc-list li {
+            padding: .4rem 0;
+            font-size: .88rem;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            border-bottom: 1px dashed rgba(0, 0, 0, .07);
+        }
+
+        .svc-list li:last-child {
+            border: none
+        }
+
+        .svc-list li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            min-width: 6px;
+            background: var(--blue);
+            border-radius: 50%;
+        }
+
+        /* ── GALLERY ── */
+        .gallery {
+            background: var(--dark)
+        }
+
+        .gallery .section-title {
+            color: var(--white)
+        }
+
+        .gallery .section-tag {
+            background: rgba(201, 168, 76, .15);
+            color: var(--gold);
+            border-color: rgba(201, 168, 76, .3);
+        }
+
+        .gallery .title-line {
+            background: linear-gradient(90deg, var(--gold), var(--blue-light))
+        }
+
+        .gallery .section-sub {
+            color: rgba(255, 255, 255, .5)
+        }
+
+        .carousel-wrap {
+            position: relative;
+            max-width: 950px;
+            margin: 0 auto;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid rgba(201, 168, 76, .25);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, .6);
+        }
+
+        .carousel-track {
+            position: relative;
+            height: 580px;
+            overflow: hidden;
+            background: #0a1628
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide.active {
+            display: block;
+            animation: fadeIn .5s ease
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: .9
+        }
+
+        .slide-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(17, 24, 39, .7) 0%, transparent 50%);
+        }
+
+        .carr-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(201, 168, 76, .9);
+            border: none;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all .3s;
+            z-index: 5;
+        }
+
+        .carr-btn:hover {
+            background: var(--gold);
+            transform: translateY(-50%) scale(1.1)
+        }
+
+        .carr-prev {
+            left: 20px
+        }
+
+        .carr-next {
+            right: 20px
+        }
+
+        .carr-counter {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, .7);
+            color: var(--gold);
+            padding: .4rem 1rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: .9rem;
+            letter-spacing: 1px;
+            border: 1px solid rgba(201, 168, 76, .3);
+        }
+
+        /* thumbnails strip */
+        .thumb-strip {
+            display: flex;
+            gap: 4px;
+            background: rgba(0, 0, 0, .5);
+            padding: 4px;
+        }
+
+        .thumb {
+            flex: 1;
+            height: 60px;
+            cursor: pointer;
+            overflow: hidden;
+            opacity: .5;
+            transition: opacity .3s;
+            border: 2px solid transparent;
+        }
+
+        .thumb.active {
+            opacity: 1;
+            border-color: var(--gold)
+        }
+
+        .thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover
+        }
+
+        /* ── CONTACT ── */
+        .contact {
+            background: var(--light)
+        }
+
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .contact-panel {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--mid) 100%);
+            padding: 3rem;
+            border-radius: 14px;
+            border-top: 4px solid var(--gold);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, .2);
+        }
+
+        .contact-panel h3 {
+            font-family: 'Raleway', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--white);
+            margin-bottom: .5rem;
+        }
+
+        .contact-panel .sub {
+            color: rgba(255, 255, 255, .5);
+            font-size: .95rem;
+            margin-bottom: 2rem
+        }
+
+        .info-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, .08);
+        }
+
+        .info-row:last-of-type {
+            border: none;
+            margin-bottom: 2rem
+        }
+
+        .info-icon {
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            background: rgba(201, 168, 76, .15);
+            border: 1px solid rgba(201, 168, 76, .3);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-size: 1.1rem;
+        }
+
+        .info-row .text strong {
+            display: block;
+            color: rgba(255, 255, 255, .5);
+            font-size: .75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: .2rem;
+        }
+
+        .info-row .text span {
+            color: var(--white);
+            font-size: 1rem
+        }
+
+        .cta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: .8rem
+        }
+
+        .cta-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .6rem;
+            padding: 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: .9rem;
+            transition: all .3s;
+            letter-spacing: .5px;
+        }
+
+        .cta-call {
+            background: var(--gold);
+            color: var(--dark)
+        }
+
+        .cta-call:hover {
+            background: var(--gold-light);
+            transform: translateY(-3px)
+        }
+
+        .cta-wa {
+            background: #25d366;
+            color: var(--white)
+        }
+
+        .cta-wa:hover {
+            background: #1ebe5d;
+            transform: translateY(-3px)
+        }
+
+        .cta-mail {
+            background: rgba(255, 255, 255, .1);
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, .2)
+        }
+
+        .cta-mail:hover {
+            background: rgba(255, 255, 255, .2);
+            transform: translateY(-3px)
+        }
+
+        .cta-sms {
+            background: rgba(26, 110, 181, .4);
+            color: var(--white);
+            border: 1px solid rgba(43, 143, 220, .4)
+        }
+
+        .cta-sms:hover {
+            background: var(--blue);
+            transform: translateY(-3px)
+        }
+
+        .map-box {
+            border-radius: 14px;
+            overflow: hidden;
+            height: 100%;
+            min-height: 520px;
+            border: 2px solid rgba(26, 110, 181, .2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .1);
+        }
+
+        .map-box iframe {
+            width: 100%;
+            height: 100%;
+            border: none
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--dark);
+            color: rgba(255, 255, 255, .6);
+            text-align: center;
+            padding: 2.5rem;
+            border-top: 3px solid var(--gold);
+        }
+
+        .foot-inner {
+            max-width: 1300px;
+            margin: 0 auto
+        }
+
+        .foot-brand {
+            font-family: 'Raleway', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--white);
+            margin-bottom: .5rem;
+        }
+
+        .foot-brand span {
+            color: var(--gold)
+        }
+
+        .foot-tagline {
+            color: var(--gold);
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: .8rem
+        }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeIn {
+            from {
+                opacity: 0
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .anim {
+            animation: fadeUp .8s ease both
+        }
+
+        /* ── RESPONSIVE ── */
+        @media(max-width:1024px) {
+            .services-grid {
+                grid-template-columns: 1fr 1fr
+            }
+        }
+
+        @media(max-width:768px) {
+            .menu-toggle {
+                display: flex
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--dark);
+                flex-direction: column;
+                padding: 1.5rem 2rem;
+                gap: 1rem;
+                display: none;
+                border-bottom: 2px solid var(--gold);
+            }
+
+            .nav-links.active {
+                display: flex
+            }
+
+            .hero-inner {
+                grid-template-columns: 1fr
+            }
+
+            .hero-right {
+                grid-template-columns: repeat(3, 1fr)
+            }
+
+            .hero h1 {
+                font-size: 2.8rem
+            }
+
+            .about-layout,
+            .contact-layout {
+                grid-template-columns: 1fr
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr
+            }
+
+            .carousel-track {
+                height: 360px
+            }
+
+            .thumb-strip {
+                display: none
+            }
+
+            .cta-grid {
+                grid-template-columns: 1fr
+            }
+
+            .section-title {
+                font-size: 2rem
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav id="nav">
+        <div class="nav-container">
+            <div class="logo-wrap">
+                <img src="img/logo.png" alt="GL Construction Builders">
+                <div class="logo-text">
+                    <span class="top"><span>GL</span> CONSTRUCTION</span>
+                    <span class="sub">&amp; Builders</span>
+                </div>
+            </div>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span><span></span><span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="home" class="hero">
+        <div class="hero-inner">
+            <div class="hero-left anim">
+                <div class="hero-badge">
+                    <i class="fas fa-hard-hat"></i>
+                    Upper Darby, PA — Serving the Region
+                </div>
+                <h1>Building Your<br><em>Vision</em> Into<br>Reality</h1>
+                <p class="tagline">"Solid Work. Real Results."</p>
+                <p class="desc">GL Construction Builders delivers reliable framing, drywall, painting, and full
+                    remodeling services. With hands-on experience and a strong commitment to quality, we provide
+                    complete property solutions.</p>
+                <div class="hero-cta">
+                    <a href="#contact" class="btn-primary"><i class="fas fa-phone"></i> Get a Free Quote</a>
+                    <a href="#services" class="btn-outline"><i class="fas fa-tools"></i> Our Services</a>
+                </div>
+            </div>
+            <div class="hero-right">
+                <div class="stat-card">
+                    <span class="num">5+</span>
+                    <span class="lbl">Years Experience</span>
+                </div>
+                <div class="stat-card">
+                    <span class="num">100%</span>
+                    <span class="lbl">Quality Work</span>
+                </div>
+                <div class="stat-card">
+                    <span class="num">6</span>
+                    <span class="lbl">Service Areas</span>
+                </div>
+                <div class="stat-card">
+                    <span class="num">24/7</span>
+                    <span class="lbl">Always Ready</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Our Story</span>
+                <h2 class="section-title">Who We Are</h2>
+                <div class="title-line"></div>
+                <p class="section-sub">A dedicated construction company built on trust, skill, and results</p>
+            </div>
+            <div class="about-layout">
+                <div class="about-left">
+                    <p>GL Construction Builders is a growing construction company focused on delivering solid
+                        workmanship and dependable service. Led by <strong>Luis Illachuma</strong>, our company is built
+                        on dedication, responsibility, and attention to detail.</p>
+                    <p>With hands-on field expertise, we specialize in structural work, interior finishing, and complete
+                        remodeling projects. We understand that every property is an investment, and our goal is to
+                        improve its functionality, appearance, and long-term value.</p>
+                    <p>We proudly serve homeowners and property managers by providing practical, efficient, and
+                        professional construction solutions tailored to each project's needs.</p>
+                    <div class="mv-stack">
+                        <div class="mv-card">
+                            <h4><i class="fas fa-bullseye"></i> Our Mission</h4>
+                            <p>To provide quality construction and remodeling services with integrity, precision, and
+                                efficiency — ensuring every project is completed safely and professionally.</p>
+                        </div>
+                        <div class="mv-card vision">
+                            <h4><i class="fas fa-eye"></i> Our Vision</h4>
+                            <p>To become a trusted construction company known for strong craftsmanship, reliability, and
+                                consistent results in residential improvement projects.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-right">
+                    <h3>Why Choose GL Construction?</h3>
+                    <div class="reason-list">
+                        <div class="reason-item">
+                            <div class="icon"><i class="fas fa-award"></i></div>
+                            <p>5 years of professional hands-on experience</p>
+                        </div>
+                        <div class="reason-item">
+                            <div class="icon"><i class="fas fa-drafting-compass"></i></div>
+                            <p>Strong structural and finishing expertise</p>
+                        </div>
+                        <div class="reason-item">
+                            <div class="icon"><i class="fas fa-handshake"></i></div>
+                            <p>Reliable and responsible service delivery</p>
+                        </div>
+                        <div class="reason-item">
+                            <div class="icon"><i class="fas fa-search-plus"></i></div>
+                            <p>Strict attention to every detail</p>
+                        </div>
+                        <div class="reason-item">
+                            <div class="icon"><i class="fas fa-home"></i></div>
+                            <p>Complete remodeling solutions under one roof</p>
+                        </div>
+                        <div class="reason-item">
+                            <div class="icon"><i class="fas fa-broom"></i></div>
+                            <p>Clean and organized job sites, always</p>
+                        </div>
+                        <div class="reason-item">
+                            <div class="icon"><i class="fas fa-tag"></i></div>
+                            <p>Fair and competitive pricing on all projects</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">What We Do</span>
+                <h2 class="section-title">Our Services</h2>
+                <div class="title-line"></div>
+                <p class="section-sub">Complete construction and property improvement solutions</p>
+            </div>
+            <div class="services-grid">
+                <div class="svc-card">
+                    <span class="svc-num">01</span>
+                    <div class="svc-icon"><i class="fas fa-ruler-combined"></i></div>
+                    <h3>Framing Services</h3>
+                    <p>Solid structural framing for residential and remodeling projects.</p>
+                    <ul class="svc-list">
+                        <li>Residential framing</li>
+                        <li>Structural framing for remodels</li>
+                        <li>Interior framing adjustments</li>
+                        <li>Framing for additions & renovations</li>
+                    </ul>
+                </div>
+                <div class="svc-card">
+                    <span class="svc-num">02</span>
+                    <div class="svc-icon"><i class="fas fa-th-large"></i></div>
+                    <h3>Drywall Services</h3>
+                    <p>Expert drywall installation, finishing, and repairs.</p>
+                    <ul class="svc-list">
+                        <li>Drywall installation</li>
+                        <li>Drywall repair and patching</li>
+                        <li>Sheetrock finishing</li>
+                        <li>Texture application & smoothing</li>
+                    </ul>
+                </div>
+                <div class="svc-card">
+                    <span class="svc-num">03</span>
+                    <div class="svc-icon"><i class="fas fa-paint-roller"></i></div>
+                    <h3>Painting Services</h3>
+                    <p>Interior and exterior painting with flawless surface prep.</p>
+                    <ul class="svc-list">
+                        <li>Interior painting</li>
+                        <li>Exterior painting</li>
+                        <li>Repaints and color changes</li>
+                        <li>Surface preparation & finishing</li>
+                    </ul>
+                </div>
+                <div class="svc-card">
+                    <span class="svc-num">04</span>
+                    <div class="svc-icon"><i class="fas fa-tools"></i></div>
+                    <h3>Full Remodeling</h3>
+                    <p>Complete interior renovations from concept to completion.</p>
+                    <ul class="svc-list">
+                        <li>Kitchen remodeling</li>
+                        <li>Bathroom remodeling</li>
+                        <li>Home upgrades & improvements</li>
+                        <li>Property refresh projects</li>
+                    </ul>
+                </div>
+                <div class="svc-card">
+                    <span class="svc-num">05</span>
+                    <div class="svc-icon"><i class="fas fa-broom"></i></div>
+                    <h3>Cleaning Services</h3>
+                    <p>Property cleanup for a fresh and move-in ready space.</p>
+                    <ul class="svc-list">
+                        <li>Post-construction cleaning</li>
+                        <li>Property clean-up</li>
+                        <li>Move-in / Move-out cleaning</li>
+                        <li>Renovation debris cleanup</li>
+                    </ul>
+                </div>
+                <div class="svc-card">
+                    <span class="svc-num">06</span>
+                    <div class="svc-icon"><i class="fas fa-leaf"></i></div>
+                    <h3>Gardening & Exterior</h3>
+                    <p>Keeping your property's exterior clean and well-maintained.</p>
+                    <ul class="svc-list">
+                        <li>Yard clean-up</li>
+                        <li>Basic landscaping support</li>
+                        <li>Exterior property maintenance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Portfolio</span>
+                <h2 class="section-title">Our Work</h2>
+                <div class="title-line"></div>
+                <p class="section-sub">Real projects, real results — built with pride</p>
+            </div>
+            <div class="carousel-wrap">
+                <div class="carousel-track" id="carouselTrack">
+                    <div class="slide active"><img src="img/1.jpg" alt="Project 1">
+                        <div class="slide-overlay"></div>
+                    </div>
+                    <div class="slide"><img src="img/2.jpg" alt="Project 2">
+                        <div class="slide-overlay"></div>
+                    </div>
+                    <div class="slide"><img src="img/3.jpg" alt="Project 3">
+                        <div class="slide-overlay"></div>
+                    </div>
+                    <div class="slide"><img src="img/4.jpg" alt="Project 4">
+                        <div class="slide-overlay"></div>
+                    </div>
+                    <div class="slide"><img src="img/5.jpg" alt="Project 5">
+                        <div class="slide-overlay"></div>
+                    </div>
+                    <div class="slide"><img src="img/6.jpg" alt="Project 6">
+                        <div class="slide-overlay"></div>
+                    </div>
+                    <div class="slide"><img src="img/7.jpg" alt="Project 7">
+                        <div class="slide-overlay"></div>
+                    </div>
+                    <div class="slide"><img src="img/8.jpg" alt="Project 8">
+                        <div class="slide-overlay"></div>
+                    </div>
+                    <div class="slide"><img src="img/9.jpg" alt="Project 9">
+                        <div class="slide-overlay"></div>
+                    </div>
+                    <div class="slide"><img src="img/10.jpg" alt="Project 10">
+                        <div class="slide-overlay"></div>
+                    </div>
+                    <div class="slide"><img src="img/11.jpg" alt="Project 11">
+                        <div class="slide-overlay"></div>
+                    </div>
+                    <div class="slide"><img src="img/12.jpg" alt="Project 12">
+                        <div class="slide-overlay"></div>
+                    </div>
+                    <div class="slide"><img src="img/13.jpg" alt="Project 13">
+                        <div class="slide-overlay"></div>
+                    </div>
+                    <div class="slide"><img src="img/14.jpg" alt="Project 14">
+                        <div class="slide-overlay"></div>
+                    </div>
+                    <div class="slide"><img src="img/15.jpg" alt="Project 15">
+                        <div class="slide-overlay"></div>
+                    </div>
+                    <button class="carr-btn carr-prev" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carr-btn carr-next" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+                    <div class="carr-counter" id="counter">1 / 15</div>
+                </div>
+                <!-- thumbnail strip -->
+                <div class="thumb-strip" id="thumbStrip">
+                    <div class="thumb active" data-idx="0"><img src="img/1.jpg" alt=""></div>
+                    <div class="thumb" data-idx="1"><img src="img/2.jpg" alt=""></div>
+                    <div class="thumb" data-idx="2"><img src="img/3.jpg" alt=""></div>
+                    <div class="thumb" data-idx="3"><img src="img/4.jpg" alt=""></div>
+                    <div class="thumb" data-idx="4"><img src="img/5.jpg" alt=""></div>
+                    <div class="thumb" data-idx="5"><img src="img/6.jpg" alt=""></div>
+                    <div class="thumb" data-idx="6"><img src="img/7.jpg" alt=""></div>
+                    <div class="thumb" data-idx="7"><img src="img/8.jpg" alt=""></div>
+                    <div class="thumb" data-idx="8"><img src="img/9.jpg" alt=""></div>
+                    <div class="thumb" data-idx="9"><img src="img/10.jpg" alt=""></div>
+                    <div class="thumb" data-idx="10"><img src="img/11.jpg" alt=""></div>
+                    <div class="thumb" data-idx="11"><img src="img/12.jpg" alt=""></div>
+                    <div class="thumb" data-idx="12"><img src="img/13.jpg" alt=""></div>
+                    <div class="thumb" data-idx="13"><img src="img/14.jpg" alt=""></div>
+                    <div class="thumb" data-idx="14"><img src="img/15.jpg" alt=""></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Get In Touch</span>
+                <h2 class="section-title">Contact Us</h2>
+                <div class="title-line"></div>
+                <p class="section-sub">Request a free estimate — we respond fast</p>
+            </div>
+            <div class="contact-layout">
+                <div class="contact-panel">
+                    <h3>Let's Build Together</h3>
+                    <p class="sub">Ready to start your project? Reach out today.</p>
+                    <div class="info-row">
+                        <div class="info-icon"><i class="fas fa-user"></i></div>
+                        <div class="text">
+                            <strong>Owner</strong>
+                            <span>Luis Illachuma</span>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-icon"><i class="fas fa-phone"></i></div>
+                        <div class="text">
+                            <strong>Phone</strong>
+                            <span>267-528-6315</span>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="text">
+                            <strong>Email</strong>
+                            <span>illachumaluis919@gmail.com</span>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="text">
+                            <strong>Address</strong>
+                            <span>562 Millbank Rd, Upper Darby, PA 19082</span>
+                        </div>
+                    </div>
+                    <div class="cta-grid">
+                        <a href="tel:2675286315" class="cta-btn cta-call"><i class="fas fa-phone"></i> Call Now</a>
+                        <a href="https://wa.me/12675286315" target="_blank" class="cta-btn cta-wa"><i
+                                class="fab fa-whatsapp"></i> WhatsApp</a>
+                        <a href="mailto:illachumaluis919@gmail.com" class="cta-btn cta-mail"><i
+                                class="fas fa-envelope"></i> Email Us</a>
+                        <a href="sms:2675286315" class="cta-btn cta-sms"><i class="fas fa-sms"></i> Text Us</a>
+                    </div>
+                </div>
+                <div class="map-box">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3056.123456789!2d-75.28!3d39.95!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c6c664d4a95555%3A0x1234567890abcdef!2s562%20Millbank%20Rd%2C%20Upper%20Darby%2C%20PA%2019082!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="foot-inner">
+            <div class="foot-brand"><span>GL</span> CONSTRUCTION BUILDERS</div>
+            <div class="foot-tagline">"Solid Work. Real Results."</div>
+            <p>&copy; 2026 GL Construction Builders. All rights reserved. | Upper Darby, PA</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile nav
+        const toggle = document.getElementById('menuToggle');
+        const links = document.getElementById('navLinks');
+        toggle.addEventListener('click', () => links.classList.toggle('active'));
+        document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => links.classList.remove('active')));
+
+        // Carousel
+        let cur = 0;
+        const slides = document.querySelectorAll('.slide');
+        const thumbs = document.querySelectorAll('.thumb');
+        const total = slides.length;
+        const counter = document.getElementById('counter');
+
+        function goTo(n) {
+            slides[cur].classList.remove('active');
+            thumbs[cur].classList.remove('active');
+            cur = (n + total) % total;
+            slides[cur].classList.add('active');
+            thumbs[cur].classList.add('active');
+            counter.textContent = `${cur + 1} / ${total}`;
+        }
+
+        document.getElementById('nextBtn').addEventListener('click', () => goTo(cur + 1));
+        document.getElementById('prevBtn').addEventListener('click', () => goTo(cur - 1));
+        thumbs.forEach(t => t.addEventListener('click', () => goTo(+t.dataset.idx)));
+
+        // Keyboard
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowRight') goTo(cur + 1);
+            if (e.key === 'ArrowLeft') goTo(cur - 1);
+        });
+
+        // Touch swipe
+        let tx = 0;
+        const track = document.getElementById('carouselTrack');
+        track.addEventListener('touchstart', e => tx = e.changedTouches[0].screenX);
+        track.addEventListener('touchend', e => {
+            const dx = e.changedTouches[0].screenX - tx;
+            if (dx < -50) goTo(cur + 1);
+            if (dx > 50) goTo(cur - 1);
+        });
+
+        // Auto-play
+        let ap = setInterval(() => goTo(cur + 1), 5000);
+        track.addEventListener('mouseenter', () => clearInterval(ap));
+        track.addEventListener('mouseleave', () => ap = setInterval(() => goTo(cur + 1), 5000));
+
+        // Navbar scroll
+        window.addEventListener('scroll', () => {
+            document.getElementById('nav').style.padding = window.scrollY > 80 ? '.5rem 0' : '';
+        });
+    </script>
+</body>
+
+</html>
